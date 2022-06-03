@@ -174,3 +174,22 @@ function addRole() {
     });
   });
 }
+
+//==================================== QUERIES ===================================
+
+//Calls to get and ask user to select a department.
+//Queries to select employee info and role info where the role is part of chosen department
+function viewEmployeesDept() {
+  db.Department.getDepartments((departments) => {
+    promptSelectDepartment(departments).then(function (departmentid) {
+      db.Employee.getEmployeesByDepartment(departmentid, (employees) => {
+        employees = employees.reduce((acc, { id, ...x }) => {
+          acc[id] = x;
+          return acc;
+        }, {});
+        console.table(employees);
+        mainMenu();
+      });
+    });
+  });
+}
