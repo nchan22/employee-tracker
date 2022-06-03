@@ -1,19 +1,13 @@
-const connection = require("../config/connection.js");
-const Employee = require("./Employee");
-const Role = require("./Role");
-const Department = require("./Department");
+var mysql = require("mysql");
+require("dotenv").config();
 
-class DB {
-  constructor(connection) {
-    this.connection = connection;
-    this.Employee = new Employee(connection);
-    this.Role = new Role(connection);
-    this.Department = new Department(connection);
-  }
+//create connection information to sql database
+var connection = mysql.createConnection({
+  host: "localhost",
+  port: 3306,
+  user: process.env.DB_USER,
+  password: process.env.DB_PW,
+  database: process.env.DB_NAME,
+});
 
-  endConnection() {
-    this.connection.end();
-  }
-}
-
-module.exports = new DB(connection);
+module.exports = connection;

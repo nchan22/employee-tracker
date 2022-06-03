@@ -2,7 +2,7 @@
   "name": "employee-tracker",
   "version": "1.0.0",
   "description": "",
-  "main": "employeeTracker.js",
+  "main": "index.js",
   "dependencies": {
     "dotenv": "^16.0.1",
     "inquirer": "^8.2.4",

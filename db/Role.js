@@ -7,8 +7,8 @@ class Role {
     console.log("Getting all roles");
     this.connection.query(
       `
-                    SELECT title, salary, name AS department_name
-                    FROM role LEFT JOIN department ON role.department_id = department.id`,
+                  SELECT title, salary, name AS department_name
+                  FROM role LEFT JOIN department ON role.department_id = department.id`,
       (err, res) => {
         if (err) throw err;
         cb(res);
