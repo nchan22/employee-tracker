@@ -129,3 +129,15 @@ function updateEmployeeRole() {
     });
   });
 }
+
+//Calls to get all employees and to prompt user to select an employee.
+//Calls to remove employee based on the user's employee choice
+function removeEmployee() {
+  db.Employee.getEmployees((employees) => {
+    promptSelectEmployee(employees).then(function (employeeid) {
+      db.Employee.removeEmployee(employeeid, (employee) => {
+        mainMenu();
+      });
+    });
+  });
+}
