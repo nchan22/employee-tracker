@@ -141,3 +141,14 @@ function removeEmployee() {
     });
   });
 }
+
+//Calls to get roles and to prompt user to select a role. Calls to remove role based on the returned role id
+function removeRole() {
+  db.Role.getRoles((roles) => {
+    promptSelectRole(roles).then(function (roleid) {
+      db.Role.removeRole(roleid, (role) => {
+        mainMenu();
+      });
+    });
+  });
+}
