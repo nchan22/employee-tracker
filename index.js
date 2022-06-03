@@ -85,3 +85,14 @@ function mainMenu() {
     }
   });
 }
+
+//Calls to get employees and roles. calls to prompt for new employee's info
+function addEmployee() {
+  db.Employee.getEmployees((managers) => {
+    db.Role.getRoles((roles) => {
+      promptSelectRole(roles).then(function (roleid) {
+        promptForEmployeeinfo(roleid, managers);
+      });
+    });
+  });
+}
