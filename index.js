@@ -164,3 +164,13 @@ function removeDepartment() {
     });
   });
 }
+
+//Calls to get roles and prompt user to select a department
+//Calls to ask the user for the rest of the new role information
+function addRole() {
+  db.Department.getDepartments((departments) => {
+    promptSelectDepartment(departments).then(function (departmentid) {
+      promptRoleInfo(departmentid);
+    });
+  });
+}
