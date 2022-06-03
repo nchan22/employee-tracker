@@ -285,3 +285,29 @@ function promptRoleInfo(departmentid) {
       });
     });
 }
+
+//Asks user to select an employee by getting list of employee names
+//This resolves once the user selects an employee name and this name is mapped to the employee id.
+//@param employees - list of objects with employee information
+function promptSelectEmployee(employees) {
+  return new Promise(function (resolve, reject) {
+    if (!employees) return reject(Error("No employees found!"));
+    let names = employees.map((e) => {
+      return e.first_name + " " + e.last_name;
+    });
+    inquirer
+      .prompt({
+        type: "list",
+        name: "employeeName",
+        message: "Select an employee",
+        choices: names,
+      })
+      .then(function (res) {
+        employees.forEach((e) => {
+          if (e.first_name + " " + e.last_name === res.employeeName) {
+            resolve(e.id);
+          }
+        });
+      });
+  });
+}
