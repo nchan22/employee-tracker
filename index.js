@@ -394,3 +394,16 @@ function displayRoles() {
     mainMenu();
   });
 }
+
+//displays department
+function displayDepartments(dept) {
+  db.Department.getDepartments((departments) => {
+    console.log("======= Departments ========");
+    departments = departments.reduce((acc, { id, ...x }) => {
+      acc[id] = x;
+      return acc;
+    }, {});
+    console.table(departments);
+    mainMenu();
+  });
+}
