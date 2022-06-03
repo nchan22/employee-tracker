@@ -111,3 +111,21 @@ function updateEmployeeManager() {
     });
   });
 }
+
+//Calls to get employees and roles. Calls to prompt user to select an employee.
+//Calls to prompt user to select a  role to update the selected employee's role
+//Calls to update employee with employee id and new role id
+function updateEmployeeRole() {
+  db.Employee.getEmployees((employees) => {
+    db.Role.getRoles((roles) => {
+      console.log("Select an employee");
+      promptSelectEmployee(employees).then(function (employeeid) {
+        promptSelectRole(roles).then(function (roleid) {
+          db.Employee.updateEmployeeRole(employeeid, roleid, (employee) => {
+            mainMenu();
+          });
+        });
+      });
+    });
+  });
+}
