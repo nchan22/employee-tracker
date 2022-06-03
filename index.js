@@ -379,3 +379,18 @@ function displayEmployees() {
     mainMenu();
   });
 }
+
+//displays roles
+function displayRoles() {
+  db.Role.getRoles((res) => {
+    console.log(
+      "=========================== Roles ==========================="
+    );
+    res = res.reduce((acc, { id, ...x }) => {
+      acc[id] = x;
+      return acc;
+    }, {});
+    console.table(res);
+    mainMenu();
+  });
+}
