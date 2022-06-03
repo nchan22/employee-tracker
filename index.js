@@ -1,3 +1,4 @@
+// menu variable to let users choose an option using inquirer npm
 var menu = [
   {
     type: "list",
@@ -31,3 +32,56 @@ var menu = [
 
 console.log("WELCOME TO EMPLOYEE TRACKER!");
 mainMenu();
+
+//start application prompt
+function mainMenu() {
+  inquirer.prompt(menu).then(function (res) {
+    switch (res.menuChoice) {
+      case "View All Employees":
+        displayEmployees();
+        break;
+      case "View All Employees by Department":
+        viewEmployeesDept();
+        break;
+      case "View All Employees by Manager":
+        break;
+      case "Add Employee":
+        addEmployee();
+        break;
+      case "Remove Employee":
+        removeEmployee();
+        break;
+      case "Update Employee Role":
+        updateEmployeeRole();
+        break;
+      case "Update Employee Manager":
+        updateEmployeeManager();
+        break;
+      case "View All Roles":
+        displayRoles();
+        break;
+      case "Add Role":
+        addRole();
+        break;
+      case "Remove Role":
+        removeRole();
+        break;
+      case "View All Departments":
+        displayDepartments();
+        break;
+      case "Add Department":
+        addDepartment(res.deptName);
+        break;
+      case "Remove Department":
+        removeDepartment();
+        break;
+      case "View Department Budget":
+        viewDepartmentBudget();
+        break;
+      case "Exit":
+        console.log("Closing connection... Goodbye!");
+        db.endConnection();
+        break;
+    }
+  });
+}
