@@ -260,3 +260,28 @@ function addDepartment(deptName) {
     mainMenu();
   });
 }
+
+//Ask user for information of the new role to add
+//Gets department names to let the user choose the role department
+//Calls to query add role
+function promptRoleInfo(departmentid) {
+  console.log("Enter new role's information");
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "Enter role title: ",
+        name: "title",
+      },
+      {
+        type: "input",
+        message: "Enter role salary: ",
+        name: "salary",
+      },
+    ])
+    .then(function (res) {
+      db.Role.addRole([res.title, res.salary, departmentid], (role) => {
+        mainMenu();
+      });
+    });
+}
