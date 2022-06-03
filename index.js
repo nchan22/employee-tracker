@@ -193,3 +193,16 @@ function viewEmployeesDept() {
     });
   });
 }
+
+//Calls to get and ask user for department. Sums all salieries from all employees working at that department
+function viewDepartmentBudget() {
+  db.Department.getDepartments((departments) => {
+    promptSelectDepartment(departments).then(function (departmentid) {
+      db.Department.getDepartmentBudget(departmentid, (departments) => {
+        console.log("Department Budget: ");
+        console.table(departments[0]);
+        mainMenu();
+      });
+    });
+  });
+}
