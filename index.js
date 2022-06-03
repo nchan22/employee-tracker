@@ -1,3 +1,6 @@
+var inquirer = require("inquirer");
+var db = require("./db/index.js");
+
 // menu variable to let users choose an option using inquirer npm
 var menu = [
   {
