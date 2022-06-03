@@ -311,3 +311,29 @@ function promptSelectEmployee(employees) {
       });
   });
 }
+
+//Asks user to choose a new role and returns it
+//@param roles - array of role objects
+function promptSelectRole(roles) {
+  console.log("Select employee role...");
+  return new Promise(function (resolve, reject) {
+    if (!roles) return reject(Error("No roles found!"));
+    let roleTitles = roles.map((r) => {
+      return r.title;
+    });
+    inquirer
+      .prompt({
+        type: "list",
+        name: "role",
+        message: "Choose a role",
+        choices: roleTitles,
+      })
+      .then(function (res) {
+        roles.forEach((r) => {
+          if (r.title === res.role) {
+            resolve(r.id);
+          }
+        });
+      });
+  });
+}
