@@ -253,3 +253,10 @@ function promptForEmployeeinfo(roleid, managers) {
       );
     });
 }
+
+//Ask user for information of the new department to add and calls to query add department
+function addDepartment(deptName) {
+  db.Department.addDepartment([deptName], (department) => {
+    mainMenu();
+  });
+}
