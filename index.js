@@ -337,3 +337,29 @@ function promptSelectRole(roles) {
       });
   });
 }
+
+//Asks user to choose a department and returns it
+//@param departments - array of department objects
+function promptSelectDepartment(departments) {
+  console.log("Select department...");
+  return new Promise(function (resolve, reject) {
+    if (!departments) return reject(Error("No departments found!"));
+    let deptNames = departments.map((d) => {
+      return d.name;
+    });
+    inquirer
+      .prompt({
+        type: "list",
+        name: "department",
+        message: "Choose a department",
+        choices: deptNames,
+      })
+      .then(function (res) {
+        departments.forEach((d) => {
+          if (d.name === res.department) {
+            resolve(d.id);
+          }
+        });
+      });
+  });
+}
