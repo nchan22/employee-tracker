@@ -152,3 +152,15 @@ function removeRole() {
     });
   });
 }
+
+//Calls to get department and to prompt user to select a department
+//Calls to remove department based on returned department id
+function removeDepartment() {
+  db.Department.getDepartments((departments) => {
+    promptSelectDepartment(departments).then(function (departmentid) {
+      db.Department.removeDepartment(departmentid, (department) => {
+        mainMenu();
+      });
+    });
+  });
+}
