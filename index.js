@@ -206,3 +206,50 @@ function viewDepartmentBudget() {
     });
   });
 }
+
+//======================================== PROMPTS =================================================
+
+//Ask user for information of the new employee to add
+//Gets all roles titles to let the user choose new employee's role
+//calls to query add employee
+function promptForEmployeeinfo(roleid, managers) {
+  console.log("Enter new employee's information");
+  let managerNames = managers.map((m) => {
+    return m.first_name + " " + m.last_name;
+  });
+  managerNames.push("No Manager");
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "Enter first name: ",
+        name: "firstName",
+      },
+      {
+        type: "input",
+        message: "Enter last name: ",
+        name: "lastName",
+      },
+      {
+        type: "list",
+        message: "Select manager: ",
+        name: "manager",
+        choices: managerNames,
+      },
+    ])
+    .then(function (res) {
+      var managerid;
+      managers.forEach((m) => {
+        if (m.first_name + " " + m.last_name === res.manager) {
+          managerid = m.id;
+        }
+      });
+
+      db.Employee.addEmployee(
+        [res.firstName, res.lastName, roleid, managerid],
+        (employee) => {
+          mainMenu();
+        }
+      );
+    });
+}
