@@ -96,3 +96,18 @@ function addEmployee() {
     });
   });
 }
+
+//Gets all the employees and asks user to select the employee and their manager
+function updateEmployeeManager() {
+  db.Employee.getEmployees((employees) => {
+    console.log("Select an employee");
+    promptSelectEmployee(employees).then(function (employeeid) {
+      console.log("Select employee's manager");
+      promptSelectEmployee(employees).then(function (managerid) {
+        db.Employee.updateEmployeeManager(employeeid, managerid, (employee) => {
+          mainMenu();
+        });
+      });
+    });
+  });
+}
